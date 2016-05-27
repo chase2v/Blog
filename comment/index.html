@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+	<title>Comment</title>
+	<link rel="shortcut icon" href="../pic/fav.png" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/comment.css">	
+	<link rel="stylesheet" type="text/css" href="../css/about.css">
+</head>
+<body>
+	<!-- 顶栏 -->
+	<div id="top" class="top">
+		<div id="logo" class="logo">
+			<div>H</div>
+		</div>
+		<div class="m-nav">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="#">Comment</a></li>
+				<li class="m-about-btn"><a >About</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /顶栏 -->
+	<!-- 留言展示板 -->
+	<div class="m-comment" id="m-comment"></div>
+	<div class="m-comment-child" id="m-comment-child">
+		<div class="m-comment-left" id="m-comment-left"></div>
+		<div class="m-comment-pause" id="m-comment-play"></div>
+		<div class="m-comment-right" id="m-comment-right"></div>
+	</div>
+	<!-- /留言板 -->
+	<!-- 留言按钮 -->
+	<div class="m-comment-button" id="m-comment-button"></div>
+	<!-- /留言按钮 -->
+	<!-- 留言板 -->
+	<div class="m-comment-new" id="m-comment-new" style="display: none;">
+		<form class="m-comment-input" id="m-comment-input">
+			<input placeholder="← Name" id="m-comment-name"></input><br>
+			<textarea placeholder="← Content" id="m-comment-content"></textarea>
+		</form>
+		<div class="m-comment-new-close" id="m-comment-new-close"></div>
+		<div class="m-comment-new-return" id="m-comment-new-return"></div>
+	</div>
+	<!-- /留言板 -->
+
+	<!-- About -->
+	<div class="m-about" id="m-about">
+		<div class="m-about-star" id="m-about-star"></div>
+		<div class="m-about-pannel" id="m-about-pannel">
+			<div class="m-about-pannel-star" id="m-about-pannel-star"></div>
+			<div class="m-about-content" id="m-about-content">
+				<div class="weibo" id="weibo"><a href="http://weibo.com/wcyy521" target="_blank"></a></div>
+			</div>
+		</div>
+	</div>
+	<!-- /About -->
+
+	<script type="text/javascript" src="../JS/animation.js"></script>
+	<script type="text/javascript" src="../JS/comment.js"></script>	
+	<script type="text/javascript" src="../JS/about.js"></script>
+</body>
+</html>

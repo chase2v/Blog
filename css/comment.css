@@ -1,0 +1,376 @@
+/* 左上角LOGO */
+.logo{
+	width: 97px;
+	height: 70px;
+	background: #000;
+}
+.logo div{
+	position: absolute;
+	top: 11px;
+	left: 33px;
+	font: bold 42px "Arial";
+	color: #fff;
+}
+/* 顶部导航栏 */
+.top .m-nav{
+	position: absolute;
+	right: 8%;
+	top: 54px;
+	width: 330px;
+	height: 18px;
+	font: 18px "Arial";
+}
+.m-nav ul{
+	color: #000;
+}
+.m-nav ul li{
+	display: inline-block;
+	margin: 0 72px 0 0;
+}
+.m-nav ul li:nth-child(3){
+	margin: 0;
+}
+.m-nav ul li a:hover{
+	color: #FE3C3C;
+}
+
+.m-comment{
+	position: relative;
+	margin-top: 41px;
+	width: 100%;
+	height: 450px;
+	background: #000;
+	overflow: hidden;
+}
+.m-comment-child{
+	position: absolute;
+	top: 111px;
+	width: 100%;
+	height: 450px;
+	background: rgba(0,0,0,0);
+	overflow: hidden;	
+}
+
+.m-comment-content{
+	position: relative;
+	margin: 0 auto;
+	width: 50%;
+	height: 450px;
+	font: 24px "宋体";
+	color: #fff;
+	/*overflow: hidden;*/
+	/*overflow-wrap: normal;*/
+	line-height: 30px;
+}
+.m-comment-main{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	line-height: 32px;
+}
+.m-comment-main span{
+	margin-left: -50px;
+}
+
+.m-comment-play{
+	position: absolute;
+	top: 41px;
+	left: 97px;
+	width: 24px;
+	height: 27px;
+	background: url(../pic/play.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+.m-comment-pause{
+	position: absolute;
+	top: 41px;
+	left: 97px;
+	width: 16px;
+	height: 22px;
+	background: url(../pic/pause.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;	
+}
+
+.m-comment-left{
+	position: absolute;
+	bottom: 41px;
+	left: 97px;
+	width: 30px;
+	height: 18px;
+	background: url(../pic/commentPrev.png);
+	background-size: contain;
+	cursor: pointer;
+}
+.m-comment-right{
+	position: absolute;
+	bottom: 41px;
+	right: 97px;
+	width: 30px;
+	height: 18px;
+	background: url(../pic/commentNext.png);
+	background-size: contain;
+	cursor: pointer;
+}
+/* 留言按钮 */
+.m-comment-button{
+	position: absolute;
+	bottom: 38px;
+	right: 92px;
+	width: 73px;
+	height: 38px;
+	background: url(../pic/commentButton.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+/* 留言界面 */
+.m-comment-new{
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.95);
+}
+.m-comment-input{
+	position: relative;
+	left: 25%;
+	top: 25%;
+	width: 50%;
+	height: 50%;
+}
+.m-comment-new input{
+	width: 100%;
+	height: 10%;	
+	font: 18px "等线";
+	color: #fff;
+	background: #000;
+	border: none;
+}
+.m-comment-new textarea{
+	width: 100%;
+	height: 90%;
+	font: 18px "等线";
+	color: #fff;
+	background: #000;
+	border: none;
+}
+.m-comment-new-close{
+	position: absolute;
+	bottom: 21%;
+	right: 25%;
+	width: 16px;
+	height: 16px;
+	background: url(../pic/wrong.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+.m-comment-new-return{
+	position: absolute;
+	bottom: 21%;
+	right: 27%;
+	width: 22px;
+	height: 16px;
+	background: url(../pic/yes.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 414px){
+/* 左上角LOGO */
+.logo{
+	width: 97px;
+	height: 70px;
+	background: #fff;
+}
+.logo div{
+	position: absolute;
+	top: 11px;
+	left: 33px;
+	font: bold 42px "Arial";
+	color: #000;
+}
+/* 顶部导航栏 */
+.top .m-nav{
+	/*display: none;*/
+	position: absolute;
+	right: 5%;
+	top: 35px;
+	width: 40%;
+	height: 18px;
+	font: 12px "Arial";
+}
+.m-nav ul{
+	color: #000;
+}
+.m-nav ul li{
+	display: inline-block;
+	margin: 0 20px 0 0;
+}
+.m-nav ul li:nth-child(3){
+	margin: 0;
+}
+.m-nav ul li a:hover{
+	color: #FE3C3C;
+}
+
+/*评论区*/
+.m-comment{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%) translateY(-100px);
+	width: 100%;
+	height: 250px;
+	background: #000;
+	overflow: hidden;
+}
+.m-comment-content{
+	position: relative;
+	margin: 0 auto;
+	width: 50%;
+	height: 250px;
+	font: 24px "宋体";
+	color: #fff;
+	/*overflow: hidden;*/
+	/*overflow-wrap: normal;*/
+	line-height: 30px;
+}
+.m-comment-main{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	line-height: 32px;
+}
+.m-comment-main span{
+	margin-left: -50px;
+}
+
+/*按钮*/
+.m-comment-child{
+	position: absolute;
+	top: 100%;
+	margin-top: -50px;
+	width: 100%;
+	height: 50px;
+	background: #000;
+	overflow: hidden;	
+}
+.m-comment-play{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 24px;
+	height: 27px;
+	background: url(../pic/play.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+.m-comment-pause{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 16px;
+	height: 22px;
+	background: url(../pic/pause.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;	
+}
+
+.m-comment-left{
+	position: absolute;
+	bottom: 50%;
+	left: 97px;
+	transform: translateY(50%);
+	width: 30px;
+	height: 18px;
+	background: url(../pic/commentPrev.png);
+	background-size: contain;
+	cursor: pointer;
+}
+.m-comment-right{
+	position: absolute;
+	bottom: 50%;
+	right: 97px;	
+	transform: translateY(50%);
+	width: 30px;
+	height: 18px;
+	background: url(../pic/commentNext.png);
+	background-size: contain;
+	cursor: pointer;
+}
+/* 留言按钮 */
+.m-comment-button{
+	display: none;
+	position: absolute;
+	bottom: 38px;
+	right: 92px;
+	width: 73px;
+	height: 38px;
+	background: url(../pic/commentButton.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+/* 留言界面 */
+.m-comment-new{
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.95);
+}
+.m-comment-input{
+	position: relative;
+	left: 25%;
+	top: 25%;
+	width: 50%;
+	height: 50%;
+}
+.m-comment-new input{
+	width: 100%;
+	height: 10%;	
+	font: 18px "等线";
+	color: #fff;
+	background: #000;
+	border: none;
+}
+.m-comment-new textarea{
+	width: 100%;
+	height: 90%;
+	font: 18px "等线";
+	color: #fff;
+	background: #000;
+	border: none;
+}
+.m-comment-new-close{
+	position: absolute;
+	bottom: 21%;
+	right: 25%;
+	width: 16px;
+	height: 16px;
+	background: url(../pic/wrong.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+.m-comment-new-return{
+	position: absolute;
+	bottom: 21%;
+	right: 27%;
+	width: 22px;
+	height: 16px;
+	background: url(../pic/yes.png) no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}
+
+}
