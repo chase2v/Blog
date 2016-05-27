@@ -92,31 +92,32 @@
 	// 事件监听器
 	function eventHandler() {
 		window.onscroll = function () {
-			if (document.body.scrollTop >= 196 && document.body.scrollTop < 512) {
+			var top = document.documentElement.scrollTop || document.body.scrollTop;
+			if (top >= 196 && top < 512) {
 				var text_block_1 = document.getElementsByClassName('m-text-block_1');
 				for (var i = text_block_1.length - 1; i >= 0; i--) {
 					text_block_1[i].style.visibility = 'visible';
 					text_block_1[i].animation('opacity',1,800,100);
 				}
-			} else if (document.body.scrollTop >= 512 && document.body.scrollTop < 828){
+			} else if (top >= 512 && top < 828){
 				var text_block_2 = document.getElementsByClassName('m-text-block_2');
 				for (var i = text_block_2.length - 1; i >= 0; i--) {
 					text_block_2[i].style.visibility = 'visible';
 					text_block_2[i].animation('opacity',1,800,100);
 				}
-			} else if (document.body.scrollTop >= 828 && document.body.scrollTop < 1144){
+			} else if (top >= 828 && top < 1144){
 				var text_block_3 = document.getElementsByClassName('m-text-block_3');
 				for (var i = text_block_3.length - 1; i >= 0; i--) {
 					text_block_3[i].style.visibility = 'visible';
 					text_block_3[i].animation('opacity',1,800,100);
 				}
-			} else if (document.body.scrollTop >= 1144 && document.body.scrollTop < 1460){
+			} else if (top >= 1144 && top < 1460){
 				var text_block_4 = document.getElementsByClassName('m-text-block_4');
 				for (var i = text_block_4.length - 1; i >= 0; i--) {
 					text_block_4[i].style.visibility = 'visible';
 					text_block_4[i].animation('opacity',1,800,100);
 				}
-			} else if (document.body.scrollTop >= 1460){
+			} else if (top >= 1460){
 				var text_block_5 = document.getElementsByClassName('m-text-block_5');
 				for (var i = text_block_5.length - 1; i >= 0; i--) {
 					text_block_5[i].style.visibility = 'visible';
@@ -128,6 +129,7 @@
 
 		// 翻页功能
 		document.getElementById('page-old').onclick = function(){
+			var top = document.documentElement.scrollTop || document.body.scrollTop;
 			if (currentPageNum < pageSum) {
 				var blockAll = document.getElementsByClassName('m-text-block');
 				if (document.body.clientWidth > 414) {
@@ -136,20 +138,21 @@
 						blockAll[i].style.opacity = 0;
 					}
 				}				
-				document.body.scrollTop = 240;
+				top = 240;
 				document.getElementById('m-text_'+currentPageNum).style.display = 'none';
 				document.getElementById('m-text_'+(currentPageNum+1)).style.display = 'block';
 				currentPageNum++;
 			}
 		}
 		document.getElementById('page-new').onclick = function(){
+			var top = document.documentElement.scrollTop || document.body.scrollTop;
 			if (currentPageNum > 1) {
 				var blockAll = document.getElementsByClassName('m-text-block');
 				for (var i = blockAll.length - 1; i >= 0; i--) {
 					blockAll[i].style.visibility = 'hidden';
 					blockAll[i].style.opacity = 0;
 				}
-				document.body.scrollTop = 240;
+				top = 240;
 				document.getElementById('m-text_'+currentPageNum).style.display = 'none';
 				document.getElementById('m-text_'+(currentPageNum-1)).style.display = 'block';
 				currentPageNum--;
@@ -158,13 +161,14 @@
 		for (var i = pageSum - 1; i >= 0; i--) {			
 			var pageChange = function(i){
 				return function (){
+					var top = document.documentElement.scrollTop || document.body.scrollTop;
 					if (currentPageNum !== (i+1)) {
 						var blockAll = document.getElementsByClassName('m-text-block');
 						for (var j = blockAll.length - 1; j >= 0; j--) {
 							blockAll[j].style.visibility = 'hidden';
 							blockAll[j].style.opacity = 0;
 						}
-						document.body.scrollTop = 240;
+						top = 240;
 						document.getElementById('m-text_'+currentPageNum).style.display = 'none';
 						
 						document.getElementById('m-text_'+(i+1)).style.display = 'block';
