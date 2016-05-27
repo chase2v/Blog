@@ -54,7 +54,7 @@
 	 var isFirst = 1;
 	 window.onscroll = function () {
 	 	// 顶栏动画
-	 	var topDis = document.body.scrollTop;
+	 	var topDis = document.documentElement.scrollTop || document.body.scrollTop;
 	 	if ( topDis >= 80 && isFirst == 0 && isTop == 1) {
 	 		top.animation('move',-80,200,20,'horizontal');
 	 		isTop = 0;
@@ -67,7 +67,7 @@
 	 	// 封面动画
 	 	if (isFirst) {
 	 		window.scrollTo(0,0);
-	 		if (document.body.clientWidth > 414) {
+	 		if ((document.body.clientWidth || document.documentElement.clientWidth) > 414) {
 		 		articleCoverTitle.animation('opacity',-1,500,100,function () {
 			 		articleCoverTitle.style.display = 'none';
 			 		article.style.visibility = 'visible';
