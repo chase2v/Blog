@@ -36,14 +36,12 @@
 
 .m-comment{
 	position: relative;
-	/*margin-top: 41px;*/
 	width: 100%;
 	background: #000;
 	overflow: hidden;
 }
 .m-comment-child{
 	position: absolute;
-	top: 111px;
 	width: 100%;
 	background: rgba(0,0,0,0);
 	overflow: hidden;	

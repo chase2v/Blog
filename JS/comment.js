@@ -7,6 +7,7 @@
 	commentPannel.style.height = commentHeight + 'px';
 	commentPannel.style.top = top + 'px';
 	commentControl.style.height = commentHeight + 'px';
+	commentControl.style.top = (top+70) + 'px';
 
 	var commentButton = document.getElementById('m-comment-button');
 	var commentCreate = document.getElementById('m-comment-new');
