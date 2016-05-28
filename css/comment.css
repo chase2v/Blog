@@ -36,9 +36,8 @@
 
 .m-comment{
 	position: relative;
-	margin-top: 41px;
+	/*margin-top: 41px;*/
 	width: 100%;
-	height: 450px;
 	background: #000;
 	overflow: hidden;
 }
@@ -46,7 +45,6 @@
 	position: absolute;
 	top: 111px;
 	width: 100%;
-	height: 450px;
 	background: rgba(0,0,0,0);
 	overflow: hidden;	
 }
@@ -55,7 +53,7 @@
 	position: relative;
 	margin: 0 auto;
 	width: 50%;
-	height: 450px;
+	height: 100%;
 	font: 24px "宋体";
 	color: #fff;
 	/*overflow: hidden;*/

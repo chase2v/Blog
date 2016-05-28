@@ -1,4 +1,13 @@
 (function () {
+	var commentPannel = document.getElementById('m-comment');
+	var commentControl = document.getElementById('m-comment-child');
+	var height = document.documentElement.clientHeight || document.body.clientHeight;
+	var top = height * .17 - 70;
+	var commentHeight = height * .66;
+	commentPannel.style.height = commentHeight + 'px';
+	commentPannel.style.top = top + 'px';
+	commentControl.style.height = commentHeight + 'px';
+
 	var commentButton = document.getElementById('m-comment-button');
 	var commentCreate = document.getElementById('m-comment-new');
 	var commentClose = document.getElementById('m-comment-new-close');
@@ -118,7 +127,6 @@
 		// tab = 0;
 		// playBtn.className = 'm-comment-play';
 		currentComment = content.amount;
-		var commentPannel = document.getElementById('m-comment');
 		commentPannel.innerHTML = '';
 		for (var i = 0; i <= content.amount - 1; i++) {
 			var commentBlk = document.createElement('div');
