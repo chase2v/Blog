@@ -37,22 +37,23 @@
 /* 展示橱窗 */
 .m-showBar{
 	position: relative;
+	/*top: 111px;*/
 	width: 100%;
-	height: 450px;
+	/*height: 450px;*/
 	background: #000;
-	margin: 41px 0 38px;
+	/*margin: 0 0 38px;*/
 }
 .m-showBar-tab{
 	position: absolute;
 	right: 8%;
-	width: 70.8%;
-	height: 450px;
+	left: 21.2%;
+	height: 100%;
 	overflow: hidden;
 }
 .m-showBar-tab-pic{
 	position: relative;
 	left: 0;
-	height: 450px;
+	height: 100%;
 }
 .m-showBar-tab-pic img{
 	position: absolute;
@@ -71,9 +72,10 @@
 */
 .m-showBar-logo{
 	position: absolute;
-	left: 17.6%;
+	left: 21.2%;
 	top: 200px;
-	width: 97px;
+	transform: translateX(-50%);
+	width: 100px;
 	height: 50px;
 	background: rgba(248,96,96,.75);
 	text-align: center;

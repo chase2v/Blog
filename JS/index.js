@@ -1,4 +1,12 @@
 (function () {
+	var showBar = document.getElementById('m-showBar');
+	var height = document.documentElement.clientHeight || document.body.clientHeight;
+	var top = height * .17 - 70;
+	var showBarHeight = height * .66;
+	showBar.style.height = showBarHeight + 'px';
+	showBar.style.top = top + 'px';
+	showBar.style.marginBottom = height * .17 + 'px';
+
 	var currentPageNum = 1;
 	// 读取文章概览
 	function readerModel(type) {
