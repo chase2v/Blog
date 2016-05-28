@@ -1,15 +1,21 @@
 (function () {
+	// 设置轮播大小和定位
 	var showBar = document.getElementById('m-showBar');
 	var height = document.documentElement.clientHeight || document.body.clientHeight;
-	var top = height * .17 - 70;
-	var showBarHeight = height * .66;
-	showBar.style.height = showBarHeight + 'px';
-	showBar.style.top = top + 'px';
-	showBar.style.marginBottom = height * .17 + 'px';
+	var width = document.documentElement.clientWidth || document.body.clientWidth;
+	if (width >= 800) {
+		var top = height * .17 - 70;
+		var showBarHeight = height * .66;
+		showBar.style.height = showBarHeight + 'px';
+		showBar.style.top = top + 'px';
+		showBar.style.marginBottom = height * .17 + 'px';
+	}
+	
 
 	var currentPageNum = 1;
+	var pageSum;
 	// 读取文章概览
-	function readerModel(type) {
+	var readerModel = function (type) {
 		var request = new XMLHttpRequest();
 		if(type === 'article'){
 			request.open('GET','./data/article.json',true);
@@ -32,7 +38,31 @@
 		}
 	}
 
-	var pageSum;
+	// 图片的读取和轮播
+	var showBarPics = function (imgs) {
+		var showBarPics = imgs.url;
+		var picWidth = parseFloat(window.getComputedStyle(document.getElementById('m-showBar-tab')).getPropertyValue('width'));
+		var picsLength = showBarPics.length * picWidth;
+		for (var i = 0; i <= showBarPics.length - 1; i++) {
+			var pic = document.createElement('img');
+			pic.src = showBarPics[i];
+			pic.style.left = '-' + picWidth*i + 'px';
+			document.getElementById('m-showBar-tab-pic').appendChild(pic);
+		}
+
+		// 轮播动画
+		var picFrame = document.getElementById('m-showBar-tab-pic');
+		var maxDistance = picsLength - picWidth;
+		var maxTimes = (picsLength/picWidth-1) * 500;
+		var maxTime = (picsLength/picWidth-1) * 5000;
+		var showBarAnimation = function () {
+			picFrame.animation('move',maxDistance,maxTime,maxTimes,function () {
+				picFrame.style.left = '0px';
+				showBarAnimation();
+			});
+		};
+		showBarAnimation();
+	}	
 
 	// 添加文章预览，列表
 	var readerUI = function (content){
@@ -98,34 +128,108 @@
 	}
 
 	// 事件监听器
-	function eventHandler() {
+	var eventHandler = function() {
+		var textBody = document.getElementById('m-text_1');
+		var textHeight = window.getComputedStyle(textBody).height;
+		var textBlockHeight = parseInt(textHeight) / 5;
+		var top = textBody.offsetTop;
+
+		var text_block_1 = document.getElementsByClassName('m-text-block_1');
+		var text_block_2 = document.getElementsByClassName('m-text-block_2');
+		var text_block_3 = document.getElementsByClassName('m-text-block_3');
+		var text_block_4 = document.getElementsByClassName('m-text-block_4');
+		var text_block_5 = document.getElementsByClassName('m-text-block_5');
+
+		if (top > 0 && top <= textBlockHeight) {
+			var text_block_1 = document.getElementsByClassName('m-text-block_1');
+			for (var i = text_block_1.length - 1; i >= 0; i--) {
+				text_block_1[i].style.visibility = 'visible';
+				text_block_1[i].animation('opacity',1,800,100);
+			}
+		} else if (top > textBlockHeight && top <= textBlockHeight*2){
+			var text_block_2 = document.getElementsByClassName('m-text-block_2');
+			for (var i = text_block_2.length - 1; i >= 0; i--) {
+				text_block_1[i].style.visibility = 'visible';
+				text_block_1[i].animation('opacity',1,800,100);
+
+				text_block_2[i].style.visibility = 'visible';
+				text_block_2[i].animation('opacity',1,800,100);
+			}
+		} else if (top > textBlockHeight*2 && top <= textBlockHeight*3){
+			var text_block_3 = document.getElementsByClassName('m-text-block_3');
+			for (var i = text_block_3.length - 1; i >= 0; i--) {
+				text_block_1[i].style.visibility = 'visible';
+				text_block_1[i].animation('opacity',1,800,100);
+				
+				text_block_2[i].style.visibility = 'visible';
+				text_block_2[i].animation('opacity',1,800,100);
+
+				text_block_3[i].style.visibility = 'visible';
+				text_block_3[i].animation('opacity',1,800,100);
+			}
+		} else if (top > textBlockHeight*3 && top <= textBlockHeight*4){
+			var text_block_4 = document.getElementsByClassName('m-text-block_4');
+			for (var i = text_block_4.length - 1; i >= 0; i--) {
+				text_block_1[i].style.visibility = 'visible';
+				text_block_1[i].animation('opacity',1,800,100);
+				
+				text_block_2[i].style.visibility = 'visible';
+				text_block_2[i].animation('opacity',1,800,100);
+				
+				text_block_3[i].style.visibility = 'visible';
+				text_block_3[i].animation('opacity',1,800,100);
+
+				text_block_4[i].style.visibility = 'visible';
+				text_block_4[i].animation('opacity',1,800,100);
+			}
+		} else if (top > textBlockHeight*4){
+			var text_block_5 = document.getElementsByClassName('m-text-block_5');
+			for (var i = text_block_5.length - 1; i >= 0; i--) {
+				text_block_1[i].style.visibility = 'visible';
+				text_block_1[i].animation('opacity',1,800,100);
+				
+				text_block_2[i].style.visibility = 'visible';
+				text_block_2[i].animation('opacity',1,800,100);
+				
+				text_block_3[i].style.visibility = 'visible';
+				text_block_3[i].animation('opacity',1,800,100);
+				
+				text_block_4[i].style.visibility = 'visible';
+				text_block_4[i].animation('opacity',1,800,100);
+
+				text_block_5[i].style.visibility = 'visible';
+				text_block_5[i].animation('opacity',1,800,100);
+			}
+		}
+
 		window.onscroll = function () {
 			var top = document.documentElement.scrollTop || document.body.scrollTop;
-			if (top >= 196 && top < 512) {
+			top = top + textBody.offsetTop;
+			if (top > 0 && top <= textBlockHeight) {
 				var text_block_1 = document.getElementsByClassName('m-text-block_1');
 				for (var i = text_block_1.length - 1; i >= 0; i--) {
 					text_block_1[i].style.visibility = 'visible';
 					text_block_1[i].animation('opacity',1,800,100);
 				}
-			} else if (top >= 512 && top < 828){
+			} else if (top > textBlockHeight && top <= textBlockHeight*2){
 				var text_block_2 = document.getElementsByClassName('m-text-block_2');
 				for (var i = text_block_2.length - 1; i >= 0; i--) {
 					text_block_2[i].style.visibility = 'visible';
 					text_block_2[i].animation('opacity',1,800,100);
 				}
-			} else if (top >= 828 && top < 1144){
+			} else if (top > textBlockHeight*2 && top <= textBlockHeight*3){
 				var text_block_3 = document.getElementsByClassName('m-text-block_3');
 				for (var i = text_block_3.length - 1; i >= 0; i--) {
 					text_block_3[i].style.visibility = 'visible';
 					text_block_3[i].animation('opacity',1,800,100);
 				}
-			} else if (top >= 1144 && top < 1460){
+			} else if (top > textBlockHeight*3 && top <= textBlockHeight*4){
 				var text_block_4 = document.getElementsByClassName('m-text-block_4');
 				for (var i = text_block_4.length - 1; i >= 0; i--) {
 					text_block_4[i].style.visibility = 'visible';
 					text_block_4[i].animation('opacity',1,800,100);
 				}
-			} else if (top >= 1460){
+			} else if (top > textBlockHeight*4){
 				var text_block_5 = document.getElementsByClassName('m-text-block_5');
 				for (var i = text_block_5.length - 1; i >= 0; i--) {
 					text_block_5[i].style.visibility = 'visible';
@@ -133,7 +237,6 @@
 				}
 			}
 		}
-
 
 		// 翻页功能
 		document.getElementById('page-old').onclick = function(){
@@ -166,7 +269,7 @@
 				currentPageNum--;
 			}
 		}
-		for (var i = pageSum - 1; i >= 0; i--) {			
+		for (var i = pageSum - 1; i >= 0; i--) {
 			var pageChange = function(i){
 				return function (){
 					var top = document.documentElement.scrollTop || document.body.scrollTop;
@@ -188,39 +291,8 @@
 		}
 	}
 
-
-	// 图片的读取和轮播
-	var showBarPics = function (imgs) {
-		var showBarPics = imgs.url;
-		var picWidth = parseFloat(window.getComputedStyle(document.getElementById('m-showBar-tab')).getPropertyValue('width'));
-		var picsLength = showBarPics.length * picWidth;
-		for (var i = 0; i <= showBarPics.length - 1; i++) {
-			var pic = document.createElement('img');
-			pic.src = showBarPics[i];
-			pic.style.left = '-' + picWidth*i + 'px';
-			document.getElementById('m-showBar-tab-pic').appendChild(pic);
-		}
-
-		// 轮播动画
-		var picFrame = document.getElementById('m-showBar-tab-pic');
-		var maxDistance = picsLength - picWidth;
-		var maxTimes = (picsLength/picWidth-1) * 500;
-		var maxTime = (picsLength/picWidth-1) * 5000;
-		var showBarAnimation = function () {
-			picFrame.animation('move',maxDistance,maxTime,maxTimes,function () {
-				picFrame.style.left = '0px';
-				showBarAnimation();
-			});
-		};
-		showBarAnimation();
-	}
-
-
-
-
-
 	// 心跳
-	function heart() {
+	var heart = function() {
 		var heart = document.getElementById('bottom-heart');
 		
 		var small = function(){
@@ -238,12 +310,10 @@
 
 	// 主程序
 	function main(){
-		// showBarPics();
-		// textPreview();
-		readerModel('img');
 		readerModel('article');
+		readerModel('img');		
 		heart();
-		eventHandler();
+		setTimeout(eventHandler,100);
 	}
 	main();
 })();
