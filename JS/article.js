@@ -1,4 +1,8 @@
 (function () {
+	var cover = document.getElementById('article-cover');
+	var height = document.documentElement.clientHeight || document.body.clientHeight;
+	cover.style.height = (height-80) + 'px';
+
 	var top = document.getElementById('top');
 	var articleCover = document.getElementsByClassName('cover-child');
 	var articleCoverTitle = document.getElementById('article-covertitle');
