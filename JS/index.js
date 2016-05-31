@@ -1,5 +1,5 @@
 (function () {
-	var gObj = {
+	var State = {
 		currentPageNum: 1,
 		pageSum: 0
 	}
@@ -73,9 +73,9 @@
 
 	// 添加文章预览，列表
 	var readerUI = function (content){
-		gObj.pageSum = Math.ceil(content.amount/5);
+		State.pageSum = Math.ceil(content.amount/5);
 		// 添加文章简介
-		for (var j = 0; j <= gObj.pageSum-1; j++) {
+		for (var j = 0; j <= State.pageSum-1; j++) {
 			var amount = content.amount > 5*(j+1) ? 5 : content.amount - 5 * j;
 			var text = document.createElement('div');
 			text.className = 'm-text';
@@ -130,10 +130,18 @@
 				textContent.id = 'm-text-content';
 				textContent.innerHTML = content.content[i];
 				textBlk.appendChild(textContent);
+
+				if(amount<=2 && i<=amount-1){
+					var block = document.createElement('div');
+					block.className = 'm-text-block no-more m-text-block_' + (i+2);
+					block.style.visibility = 'hidden';
+					document.getElementById('m-text_' + (j+1)).appendChild(block);
+				}
 			}
 		}
 		showTextBlock();
 	}
+	
 	// 显示textblock
 	var showTextBlock = function () {
 		var textBody = document.getElementById('m-text_1');
@@ -184,7 +192,7 @@
 
 	var showTextBlockInitial = function () {
 		// 首先判断屏幕高度是否比m-text的offsetTop高
-		var textBody = document.getElementById('m-text_' + gObj.currentPageNum);
+		var textBody = document.getElementById('m-text_' + State.currentPageNum);
 		var textBodyTop = textBody.offsetTop;
 		var textBlockHeight = parseInt(window.getComputedStyle(textBody).height) / 5;
 		var browserHeight = document.documentElement.clientHeight || document.body.clientHeight;
@@ -230,7 +238,7 @@
 	var changePage = function() {
 		// 翻页功能
 		document.getElementById('page-old').onclick = function(){
-			if (gObj.currentPageNum < gObj.pageSum) {
+			if (State.currentPageNum < State.pageSum) {
 				var blockAll = document.getElementsByClassName('m-text-block');
 				
 					for (var i = blockAll.length - 1; i >= 0; i--) {
@@ -239,14 +247,14 @@
 					}	
 				document.documentElement.scrollTop = 0;
 				document.body.scrollTop = 0;
-				document.getElementById('m-text_'+gObj.currentPageNum).style.display = 'none';
-				document.getElementById('m-text_'+(gObj.currentPageNum+1)).style.display = 'block';
-				gObj.currentPageNum++;
+				document.getElementById('m-text_'+State.currentPageNum).style.display = 'none';
+				document.getElementById('m-text_'+(State.currentPageNum+1)).style.display = 'block';
+				State.currentPageNum++;
 				showTextBlockInitial();
 			}
 		}
 		document.getElementById('page-new').onclick = function(){
-			if (gObj.currentPageNum > 1) {
+			if (State.currentPageNum > 1) {
 				var blockAll = document.getElementsByClassName('m-text-block');
 				for (var i = blockAll.length - 1; i >= 0; i--) {
 					blockAll[i].style.visibility = 'hidden';
@@ -254,16 +262,16 @@
 				}
 				document.documentElement.scrollTop = 0;
 				document.body.scrollTop = 0;
-				document.getElementById('m-text_'+gObj.currentPageNum).style.display = 'none';
-				document.getElementById('m-text_'+(gObj.currentPageNum-1)).style.display = 'block';
-				gObj.currentPageNum--;
+				document.getElementById('m-text_'+State.currentPageNum).style.display = 'none';
+				document.getElementById('m-text_'+(State.currentPageNum-1)).style.display = 'block';
+				State.currentPageNum--;
 				showTextBlockInitial();
 			}
 		}
-		for (var i = gObj.pageSum - 1; i >= 0; i--) {
+		for (var i = State.pageSum - 1; i >= 0; i--) {
 			var pageTo = function(i){
 				return function (){
-					if (gObj.currentPageNum !== (i+1)) {
+					if (State.currentPageNum !== (i+1)) {
 						var blockAll = document.getElementsByClassName('m-text-block');
 						for (var j = blockAll.length - 1; j >= 0; j--) {
 							blockAll[j].style.visibility = 'hidden';
@@ -271,9 +279,9 @@
 						}
 						document.documentElement.scrollTop = 0;
 						document.body.scrollTop = 0;
-						document.getElementById('m-text_' + gObj.currentPageNum).style.display = 'none';
+						document.getElementById('m-text_' + State.currentPageNum).style.display = 'none';
 						document.getElementById('m-text_'+(i+1)).style.display = 'block';
-						gObj.currentPageNum=(i+1);
+						State.currentPageNum=(i+1);
 						showTextBlockInitial();
 					}
 				}
@@ -300,6 +308,30 @@
 		}
 	}
 
+	// loading动画
+	var loading = function () {
+		var readyNum = 0;
+		var readyArr = [];
+		var arr = ['./pic/showBar_1.jpg','./pic/showBar_2.jpg','./pic/showBar_1.jpg','./pic/heart.png','./pic/about.png','./pic/about_bkg.png','./pic/star.png','./pic/starb.png','./pic/weibo.png'];
+		var loader = function () {
+			if(readyNum < arr.length) {
+				readyArr[readyNum] = new Image();
+				readyArr[readyNum].onload = function () {
+					readyNum++;
+					document.getElementById('loading').style.width = readyNum / arr.length * 100 + '%';
+					loader();
+				}
+				readyArr[readyNum].src = arr[readyNum];
+			}else{
+				document.getElementById('loading').style.width = 0;
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			}	
+		}
+		loader();
+	}
+
 	// 第一程序
+	loading();	
 	setShowBarSize();
 })();

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>阅读器</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" >
+	<link rel="stylesheet" href="../css/reset.css">
+	<link rel="stylesheet" href="../css/reader.css">
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="header" id="header">
+		<img src="../pic/return.png" width="30" height="30">
+	</div>
+	<!-- /头部 -->
+	
+	<!-- 内容 -->
+	<div class="content" id="content">
+		<h1></h1>
+		<p></p>
+		<div></div>
+	</div>
+	<!-- /内容 -->
+	
+	<!-- 底部栏 -->
+	<div class="footer" id="footer">
+		<div class="footer-font footer-opt" id="font-button">
+			<img src="../pic/font.png">
+			<div>字体</div>
+		</div>
+		<div class="footer-theme footer-opt" id="theme-button">
+			<img src="../pic/theme.png">
+			<div>主题</div>
+		</div>
+		<div class="footer-night footer-opt" id="night-button">
+			<img src="../pic/night.png">
+			<div>夜间</div>
+		</div>		
+	</div>
+	<!-- /底部栏 -->
+
+	<!-- 控制面板 -->
+	<div class="font-panel" id="font-panel">
+		<img src="../pic/font-size.png" width="20" height="20" id="small-font">
+		<div class="font-panel-size" id="font-panel-size">15</div>
+		<img src="../pic/font-size.png" width="30" height="30" id="big-font">
+	</div>
+	<div class="theme-panel" id="theme-panel">
+		<div class="theme theme-selected"></div>
+		<div class="theme"></div>
+		<div class="theme"></div>
+		<div class="theme"></div>
+		<div class="theme"></div>
+	</div>
+	<!-- /控制面板 -->
+
+	<!-- 中间点触区 -->
+	<div class="tap-area" id="tap-area"></div>
+	<!-- /中间点触区 -->
+
+	<script type="text/javascript" src="../JS/reader.js"></script>	
+</body>
+</html>

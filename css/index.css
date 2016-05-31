@@ -1,3 +1,13 @@
+/* loading */
+.loading{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background: #f86060;
+}
+
 /* 左上角LOGO */
 .logo{
 	width: 100px;
@@ -76,14 +86,14 @@
 	overflow: hidden;
 }
 .m-text-block{
+	opacity: 0;
+	visibility: hidden;
 	width: 950px;
 	height: 161px;
 	position: relative;
 	margin: 0 auto;
 	padding: 75px 25px;
 	border-bottom: solid 1px #c9c9c9;
-	opacity: 0;
-	visibility: hidden;
 }
 .m-text-block:first-child{
 	padding: 0 25px 75px 25px;
@@ -118,6 +128,10 @@
 	/*text-overflow: ellipsis;*/
     overflow: hidden;
     /*white-space: nowrap;*/
+}
+.no-more{
+	text-align: center;
+	background: url(../pic/no-more.png) 50% 50% no-repeat;
 }
 
 /* 翻页 */
