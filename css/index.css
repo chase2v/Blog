@@ -325,7 +325,8 @@
 		.m-text-title{
 			overflow: hidden;
 			width: 100%;
-			height: 32px;
+			height: 35px;
+			line-height: 35px;
 			font: 28px "等线";
 		}
 		.m-text-title a:hover{
