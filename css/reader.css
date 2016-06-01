@@ -1,3 +1,9 @@
+body{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
 /* 顶部栏 */
 .header{
 	display: none;
