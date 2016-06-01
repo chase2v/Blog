@@ -34,16 +34,16 @@
 	margin-bottom: 10px;
 }
 .content div{
-	line-height: 20px;
+	line-height: 30px;
 }
 
 /* 主题 */
 .night{
-	color: #fff;
+	color: #4E534F;
 	background: #333;
 }
 .light{
-	color: #fff;
+	color: #000;
 	background: #e9dfc7;	
 }
 .soft{
@@ -51,7 +51,7 @@
 	background: #a4a4a4;	
 }
 .dark{
-	color: #fff;
+	color: #7685A2;
 	background: #283548;	
 }
 
