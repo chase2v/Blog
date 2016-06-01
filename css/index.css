@@ -225,7 +225,7 @@
 		}
 		.m-nav ul{
 			display: none;
-			width: 190px;
+			width: 200px;
 			position: absolute;
 			right: 0;
 			bottom: -2px;
@@ -325,8 +325,8 @@
 		.m-text-title{
 			overflow: hidden;
 			width: 100%;
-			height: 30px;
-			font: 30px "等线";
+			height: 32px;
+			font: 28px "等线";
 		}
 		.m-text-title a:hover{
 			color: #FE3C3C;
