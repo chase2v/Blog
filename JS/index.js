@@ -3,19 +3,30 @@
 		currentPageNum: 1,
 		pageSum: 0
 	}
+	var Dom = {
+		browserWidth: document.documentElement.clientWidth || document.body.clientWidth,
+		nav: document.getElementById('m-nav'),
+	}
 
-	// 设置showBar大小和定位
-	var setShowBarSize = function () {
+	// 设置showBar大小和定位,菜单栏键点击事件
+	var init = function () {
 		var showBar = document.getElementById('m-showBar');
 		var browserHeight = document.documentElement.clientHeight || document.body.clientHeight;
-		var browserWidth = document.documentElement.clientWidth || document.body.clientWidth;
-		if (browserWidth >= 800) {
+		if (Dom.browserWidth >= 800) {
 			var top = browserHeight * .17 - 70;
 			var showBarHeight = browserHeight * .66;
 			showBar.style.height = showBarHeight + 'px';
 			showBar.style.top = top + 'px';
 			showBar.style.marginBottom = browserHeight * .17 + top + 'px';
 		}
+
+		if (Dom.browserWidth <= 650) {
+			Dom.nav.onclick = function () {
+				Dom.nav.getElementsByTagName('ul')[0].style.display = 'block';
+				Dom.nav.style.background = 'none';
+			}
+		}
+
 		readerModel('article');
 		readerModel('img');
 	}
@@ -154,26 +165,33 @@
 		var text_block_4 = document.getElementsByClassName('m-text-block_4');
 		var text_block_5 = document.getElementsByClassName('m-text-block_5');
 
-		showTextBlockInitial();
+		var m = showTextBlockInitial();
 
-		var textBodyScroll = function () {
+		window.onscroll = function () {
+			// 菜单栏
+			if (Dom.browserWidth < 500) {
+				Dom.nav.getElementsByTagName('ul')[0].style.display = 'none';
+				Dom.nav.style.background = 'url(./pic/menu.png) 100% 100% / contain no-repeat';
+			}
+
+			// 文章预览
 			var top = document.documentElement.scrollTop || document.body.scrollTop;
-			if (top > textBlockHeight*4){
+			if (top > textBlockHeight*4 - m){
 				for (var i = text_block_5.length - 1; i >= 0; i--) {
 					text_block_5[i].style.visibility = 'visible';
 					text_block_5[i].animation('opacity',1,1000,100);
 				}
-			} else if (top > textBlockHeight*3){
+			} else if (top > textBlockHeight*3 - m){
 				for (var i = text_block_4.length - 1; i >= 0; i--) {
 					text_block_4[i].style.visibility = 'visible';
 					text_block_4[i].animation('opacity',1,1000,100);
 				}
-			} else if (top > textBlockHeight*2){
+			} else if (top > textBlockHeight*2 - m){
 				for (var i = text_block_3.length - 1; i >= 0; i--) {
 					text_block_3[i].style.visibility = 'visible';
 					text_block_3[i].animation('opacity',1,1000,100);
 				}
-			} else if (top > 300){
+			} else if (top > textBlockHeight*1 - m){
 				for (var i = text_block_2.length - 1; i >= 0; i--) {
 					text_block_2[i].style.visibility = 'visible';
 					text_block_2[i].animation('opacity',1,1000,100);
@@ -181,12 +199,10 @@
 			} else if (top > 0) {
 				for (var i = text_block_1.length - 1; i >= 0; i--) {
 					text_block_1[i].style.visibility = 'visible';
-					text_block_1[i].animation('opacity',1,1000,100);
-						
+					text_block_1[i].animation('opacity',1,1000,100);	
 				}
 			}
 		}
-		window.onscroll = textBodyScroll;
 		changePage();
 	}
 
@@ -202,39 +218,44 @@
 		var text_block_3 = document.getElementsByClassName('m-text-block_3');
 		var text_block_4 = document.getElementsByClassName('m-text-block_4');
 		var text_block_5 = document.getElementsByClassName('m-text-block_5');
-		
+
 		if(textBodyTop < browserHeight){
 			var m = browserHeight - textBodyTop;
-			if (m > 0) {
-				for (var i = text_block_1.length - 1; i >= 0; i--) {
-					text_block_1[i].style.visibility = 'visible';
-					text_block_1[i].style.opacity = 1;
-				}
-			} else if (m > textBlockHeight){
-				for (var i = text_block_2.length - 1; i >= 0; i--) {
-					text_block_2[i].style.visibility = 'visible';
-					text_block_2[i].style.opacity = 1;
-				}
-			} else if (m > textBlockHeight*2){
-				for (var i = text_block_3.length - 1; i >= 0; i--) {
-					text_block_3[i].style.visibility = 'visible';
-					text_block_3[i].style.opacity = 1;
-				}
-			} else if (m > textBlockHeight*3){
-				for (var i = text_block_4.length - 1; i >= 0; i--) {
-					text_block_4[i].style.visibility = 'visible';
-					text_block_4[i].style.opacity = 1;
-				}
-			} else if (m > textBlockHeight*4){
+			if (m > textBlockHeight*4){
 				for (var i = text_block_5.length - 1; i >= 0; i--) {
 					text_block_5[i].style.visibility = 'visible';
 					text_block_5[i].style.opacity = 1;
 				}
 			}
+			if (m > textBlockHeight*3){
+				for (var i = text_block_4.length - 1; i >= 0; i--) {
+					text_block_4[i].style.visibility = 'visible';
+					text_block_4[i].style.opacity = 1;
+				}
+			} 
+			if (m > textBlockHeight*2){
+				for (var i = text_block_3.length - 1; i >= 0; i--) {
+					text_block_3[i].style.visibility = 'visible';
+					text_block_3[i].style.opacity = 1;
+				}
+			}
+			if (m > textBlockHeight){
+				for (var i = text_block_2.length - 1; i >= 0; i--) {
+					text_block_2[i].style.visibility = 'visible';
+					text_block_2[i].style.opacity = 1;
+				}
+			}
+			if (m > 0) {
+				for (var i = text_block_1.length - 1; i >= 0; i--) {
+					text_block_1[i].style.visibility = 'visible';
+					text_block_1[i].style.opacity = 1;
+				}
+			}
 		}
+		return m;
 	}
 
-	// 事件监听器
+	// 翻页功能
 	var changePage = function() {
 		// 翻页功能
 		document.getElementById('page-old').onclick = function(){
@@ -329,9 +350,9 @@
 			}	
 		}
 		loader();
-	}
+	}	
 
 	// 第一程序
 	loading();	
-	setShowBarSize();
+	init();
 })();

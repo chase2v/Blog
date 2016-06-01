@@ -20,16 +20,17 @@
 	top: 35px;
 	right: 60px;
 	font: 18px "Arial";
+	color: #000;
 }
 .m-nav ul li{
 	display: inline-block;
 	margin-right: 60px;
 }
-.m-nav ul li:nth-child(3){
-	margin-right: 0;
-}
 .m-nav ul li a{
 	color: #fff;
+}
+.m-nav ul li:nth-child(3){
+	margin-right: 0;
 }
 .m-nav ul li a:hover{
 	color: #fe3c3c;
@@ -42,13 +43,13 @@
 	width: 100%;
 	color: #fff;
 	text-align: center;
-	/*display: none;*/
+	overflow: hidden;
 }
 .cover-child{
-	position: absolute;
 	width: 50%;
-	height: 50%;
-	/*opacity: .7;*/
+	height: 100%;
+	position: relative;
+	float: left;
 }
 .cover-child-1{
 	top: 0;
@@ -56,16 +57,9 @@
 }
 .cover-child-2{
 	top: 0;
-	right: 0;
-}
-.cover-child-3{
-	bottom: 0;
 	left: 0;
 }
-.cover-child-4{
-	bottom: 0;
-	right: 0;
-}
+
 .article-covertitle{
 	opacity: 0;
 	font: 48px "等线";
@@ -77,14 +71,6 @@
 	margin: 0 auto;
 	letter-spacing: .5em;
 }
-/*.article-read{
-	font: 30px "等线";
-	position: absolute;
-	top: 450px;
-	left: 50%;
-	text-indent: -1.3em;
-	letter-spacing: .2em;
-}*/
 .article-down{
 	opacity: 0;
 	position: absolute;
@@ -122,39 +108,50 @@
 	padding-bottom: 100px;
 }
 
-@media screen and (max-width: 414px){
+@media screen and (max-width: 500px){
 .top{
 	position: fixed;
 	left: 0;
 	top: 0;
 	height: 70px;
 	width: 100%;
-	background: #000;
+	background: #fff;
 }
 .logo{
 	height: 56px;
-	width: 100px;
-	background: #fe3c3c;
+	width: 80px;
+	background: #fff;
 	text-align: center;
-	font: bold 43px "Arial";
-	color: #fff;
+	font: bold 40px "Arial";
+	color: #000;
 	padding-top: 14px;
 }
 .m-nav{
 	position: absolute;
-	top: 35px;
-	right: 5%;
-	font: 12px "Arial";
+	top: 24px;
+	right: 6%;
+	width: 26px;
+	height: 26px;
+	font: 15px "Arial";
+	color: #000;
+	background: url(../pic/menu.png) 100% 100% / contain no-repeat;
+}
+.m-nav ul{
+	display: none;
+	width: 190px;
+	position: absolute;
+	right: 0;
+	bottom: -2px;
 }
 .m-nav ul li{
 	display: inline-block;
 	margin-right: 20px;
 }
+.m-nav ul li a{
+	color: #000;
+}
 .m-nav ul li:nth-child(3){
 	margin-right: 0;
-}
-.m-nav ul li a{
-	color: #fff;
 }
 .m-nav ul li a:hover{
 	color: #fe3c3c;
@@ -166,16 +163,15 @@
 	position: absolute;
 	top: 80px;
 	width: 100%;
-	height: 592px;
 	color: #fff;
 	text-align: center;
-	/*display: none;*/
+	overflow: hidden;
 }
 .cover-child{
-	position: absolute;
 	width: 50%;
-	height: 50%;
-	/*opacity: .7;*/
+	height: 100%;
+	position: relative;
+	float: left;
 }
 .cover-child-1{
 	top: 0;
@@ -183,39 +179,26 @@
 }
 .cover-child-2{
 	top: 0;
-	right: 0;
-}
-.cover-child-3{
-	bottom: 0;
 	left: 0;
 }
-.cover-child-4{
-	bottom: 0;
-	right: 0;
-}
+
 .article-covertitle{
 	opacity: 0;
 	font: 48px "等线";
+	height: 55px;
 	position: absolute;
-	top: 200px;
+	top: 40%;
 	width: 100%;
 	text-align: center;
 	margin: 0 auto;
 	letter-spacing: .5em;
 }
-/*.article-read{
-	font: 30px "等线";
-	position: absolute;
-	top: 450px;
-	left: 50%;
-	text-indent: -1.3em;
-	letter-spacing: .2em;
-}*/
 .article-down{
 	opacity: 0;
-	position: relative;
-	top: 520px;
-	margin: 0 auto;
+	position: absolute;
+	bottom: 30px;
+	left: 50%;
+	margin-left: -15px;
 	width: 30px;
 	height: 18px;
 	background: url(../pic/articleDown.png) no-repeat;
@@ -226,24 +209,35 @@
 .article{
 	visibility: visible;
 	opacity: 1;
+	width: 85%;
 	position: relative;
-	top: 180px;
-	width: 75%;
+	top: 100px;
 	margin: 0 auto;
 }
 .article-title{
-	padding-top: 150px;
-	font: bold 36px "等线";
+	padding-top: 0;
+	font: bold 24px "等线";
 }
 .article-date{
-	padding: 20px 0 100px;
+	padding: 20px 0 20px;
 	font: 15px "Arial";
 	color: #fe3c3c;
 }
 .article-main{
-	font: 18px "等线";
-	line-height: 30px;
+	font: 15px "等线";
+	line-height: 20px;
 	white-space: pre-wrap;
-	padding-bottom: 100px;
+	padding-bottom: 50px;
+}
+.reader-btn{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 1px solid #000;
+	position: fixed;
+	right: 15px;
+	bottom: 15px;
+	background: url(../pic/reader.png) no-repeat;
+	background-size: 100% 100%;
 }
 }

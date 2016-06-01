@@ -1,86 +1,167 @@
 (function () {
-	var commentPannel = document.getElementById('m-comment');
-	var commentControl = document.getElementById('m-comment-child');
-	var height = document.documentElement.clientHeight || document.body.clientHeight;
-	var top = height * .17 - 70;
-	var commentHeight = height * .66;
-	commentPannel.style.height = commentHeight + 'px';
-	commentPannel.style.top = top + 'px';
-	commentControl.style.height = commentHeight + 'px';
-	commentControl.style.top = (top+70) + 'px';
+	// 提前获取重复使用的dom
+	var Dom = {
+		commentPanel: document.getElementById('m-comment'),
+		controlPanel: document.getElementById('m-comment-child'),		
+		createPanel: document.getElementById('m-comment-new'),
+		playBtn: document.getElementById('m-comment-play'),
+		nav: document.getElementById('m-nav'),
+		width: document.documentElement.clientWidth || document.body.clientWidth,
+	}
+	var State = {
+		currentComment: 0,
+		commentAmount: 1,
+		tab: 1,
+	}
 
-	var commentButton = document.getElementById('m-comment-button');
-	var commentCreate = document.getElementById('m-comment-new');
-	var commentClose = document.getElementById('m-comment-new-close');
-	var commentReturn = document.getElementById('m-comment-new-return');
-	var clickButton = function () {
-		commentCreate.style.display = 'block';
-		commentCreate.animation('opacity',1,500,100);
+	// 初始化：设置面板高度和定位
+	var init = function () {
+		var height = document.documentElement.clientHeight || document.body.clientHeight;
+		var top = height * .17 - 70;
+		var commentHeight = height * .66;
+		if(Dom.width > 800){
+			Dom.commentPanel.style.height = commentHeight + 'px';
+			Dom.commentPanel.style.top = top + 'px';
+			Dom.controlPanel.style.height = commentHeight + 'px';
+			Dom.controlPanel.style.top = (top+70) + 'px';
+		}
+
+		if (Dom.width <= 500) {
+			Dom.nav.onclick = function () {
+				Dom.nav.getElementsByTagName('ul')[0].style.display = 'block';
+				Dom.nav.style.background = 'none';
+			}
+		}
+
+		window.onscroll = function () {
+			if (Dom.width < 500) {
+				Dom.nav.getElementsByTagName('ul')[0].style.display = 'none';
+				Dom.nav.style.background = 'url(../pic/menu.png) 100% 100% / contain no-repeat';
+			}
+		}		
+
+		readerModel();
+	}
+
+	// 新建留言按钮
+	document.getElementById('m-comment-button').onclick = function () {
+		Dom.createPanel.style.display = 'block';
+		Dom.createPanel.animation('opacity',1,500,100);
 	};
-	var clickClose = function () {
-		commentCreate.animation('opacity',-1,500,100);
+	// 关闭留言面板按钮
+	document.getElementById('m-comment-new-close').onclick = function () {
+		Dom.createPanel.animation('opacity',-1,500,100);
 		setTimeout(function(){
 			document.getElementById('m-comment-name').value = '';
 			document.getElementById('m-comment-content').value = '';
-			commentCreate.style.display = 'none';
+			Dom.createPanel.style.display = 'none';
 		},500);
 	}
-	var clickReturn = function () {
-		inputLoader();
-		commentCreate.animation('opacity',-1,500,100);
+	// 留言面板回车键
+	document.getElementById('m-comment-new-return').onclick = function () {
+		// 读取输入框内容
+		var name = document.getElementById('m-comment-name').value;
+		var content = document.getElementById('m-comment-content').value;
+		commentSave(name,content);
+
+		Dom.createPanel.animation('opacity',-1,500,100);
 		setTimeout(function(){
 			document.getElementById('m-comment-name').value = '';
 			document.getElementById('m-comment-content').value = '';
-			commentCreate.style.display = 'none';
+			Dom.createPanel.style.display = 'none';
 		},500);
 	}
 
+	// 播放暂停按钮
+	Dom.playBtn.onclick = function () {
+		var currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+		if (State.tab == 1) {
+			this.className = 'm-comment-play';
+			State.tab = 0;
+			setTimeout(function () {
+				currentContent.style.display = 'block';
+				currentContent.style.opacity = 1;
+			},1500);
+		} else {
+			this.className = 'm-comment-pause';
+			State.tab = 1;
+			commentTab();
+		}
+	}
 
 	// 切换按钮
-	var commentLeft = document.getElementById('m-comment-left');
-	var commentRight = document.getElementById('m-comment-right');
-	var currentComment = 1;
-
-	var clickRight = function () {
-		currentContent = document.getElementById('m-comment-content-' + currentComment);
-		if (currentComment < comment.amount) {
-			currentContent.animation('opacity',-1,500,100);
+	document.getElementById('m-comment-right').onclick = function () {
+		var currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+		if (State.tab == 1) {
+			State.tab = 0;
+			Dom.playBtn.className = 'm-comment-play';
 			setTimeout(function () {
-				currentContent.style.display = 'none';
-			},500);		
-			currentComment++;
+				currentContent.style.display = 'block';
+				currentContent.style.opacity = 1;
+				if (State.tab == 0) {
+					currentContent.style.display = 'none';
+					currentContent.style.opacity = 0;
+					if (State.currentComment == State.commentAmount - 1) {
+						State.currentComment = 0;
+					} else {
+						State.currentComment++;
+					}
+					currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+					currentContent.style.display = 'block';
+					currentContent.style.opacity = 1;
+				}
+			},1000);
+		} else {
+			currentContent.style.display = 'none';
+			currentContent.style.opacity = 0;
+			if (State.currentComment == State.commentAmount - 1) {
+				State.currentComment = 0;
+			} else {
+				State.currentComment++;
+			}
+			currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+			currentContent.style.display = 'block';
+			currentContent.style.opacity = 1;
 		}
-		tab = 0;
-		playBtn.className = 'm-comment-play';
-		setTimeout(function () {
-			// currentContent.style.display = 'none';
-			nextContent = document.getElementById('m-comment-content-' + currentComment);
-			nextContent.style.display = 'block';
-			nextContent.animation('opacity',1,500,100);				
-		},1000);
 	}
-	var clickLeft = function () {
-		currentContent = document.getElementById('m-comment-content-' + currentComment);
-		if (currentComment > 1) {
-			currentContent.animation('opacity',-1,500,100);
+	document.getElementById('m-comment-left').onclick = function () {
+		var currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+		if (State.tab == 1) {
+			State.tab = 0;
+			Dom.playBtn.className = 'm-comment-play';
 			setTimeout(function () {
-				currentContent.style.display = 'none';
-			},500);
-			currentComment--;
-		}		
-		tab = 0;
-		playBtn.className = 'm-comment-play';
-		setTimeout(function () {						
-			// currentContent.style.display = 'none';
-			preContent = document.getElementById('m-comment-content-' + currentComment);
-			preContent.style.display = 'block';
-			preContent.animation('opacity',1,500,100);				
-		},1000);
-
+				currentContent.style.display = 'block';
+				currentContent.style.opacity = 1;
+				if (State.tab == 0) {
+					currentContent.style.display = 'none';
+					currentContent.style.opacity = 0;
+					if (State.currentComment == 0) {
+						State.currentComment = State.commentAmount - 1;
+					} else {
+						State.currentComment--;
+					}
+					currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+					currentContent.style.display = 'block';
+					currentContent.style.opacity = 1;
+				}
+			},1000);
+		} else {
+			currentContent.style.display = 'none';
+			currentContent.style.opacity = 0;
+			if (State.currentComment == 0) {
+				State.currentComment = State.commentAmount - 1;
+			} else {
+				State.currentComment--;
+			}
+			currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+			currentContent.style.display = 'block';
+			currentContent.style.opacity = 1;
+		}
 	}
 
+	// 数据层
 	// 读取留言
-	function readerModel(){
+	var readerModel = function(){
 		var request = new XMLHttpRequest();
 		request.open('GET','../data/comment.json',true);
 		request.send();
@@ -104,114 +185,57 @@
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200){
 				var content = JSON.parse(xhr.responseText);
-				debugger
 				commentLoader(content);
 			}
 		}
 	}
 
-	// 留言数据
-	var comment = {
-		amount: 5,
-		name: ['小明','小王','小李子','Anna','Jason',],
-		content: [
-			'过来踩一下！','过来踩一下！','过来踩一下！','过来踩一下！','过来踩一下！',
-		],
-	}
-	var commentAmount;
 	// 总体载入留言
 	var commentLoader = function (content) {
-		commentAmount = content.amount;
-		//<div class="m-comment-content">
-		// 	<div class="m-comment-main"><span>小明：</span><br>过来踩一下！！！</div>
-		//</div>
-		// tab = 0;
-		// playBtn.className = 'm-comment-play';
-		currentComment = content.amount;
-		commentPannel.innerHTML = '';
+		State.commentAmount = content.amount;
+		State.currentComment = 0;
+		Dom.commentPanel.innerHTML = '';
 		for (var i = 0; i <= content.amount - 1; i++) {
 			var commentBlk = document.createElement('div');
 			commentBlk.className = 'm-comment-content';
-			commentBlk.id = 'm-comment-content-' + (i+1);
-			if (i !== currentComment) {
+			commentBlk.id = 'm-comment-content-' + i;
+			if (i != State.currentComment && Dom.width > 500) {
 				commentBlk.style.display = 'none';
 				commentBlk.style.opacity = 0;
 			}
-			commentPannel.appendChild(commentBlk);
+			Dom.commentPanel.appendChild(commentBlk);
 
 			var commentMain = document.createElement('div');
 			commentMain.className = 'm-comment-main';
 			commentMain.innerHTML = '<span>' + content.name[i] + '：</span><br>' + content.content[i];	
 			commentBlk.appendChild(commentMain);
 		}
+		if(Dom.width > 500){
+			commentTab();
+		}		
 	}
-	
 
-
-	// 留言轮播
-	var tab = 2;
-	var playBtn = document.getElementById('m-comment-play');
-	var currentContent = document.getElementById('m-comment-content-' + currentComment);;
-	var preContent;
+	// 留言播放动画
 	var commentTab = function () {	
-		var play = function(){
-			if (tab == 1) {
-				currentContent = document.getElementById('m-comment-content-' + currentComment);			
-				currentContent.animation('opacity',-1,2000,100);
-				setTimeout(function () {
-					currentContent.style.display = 'none';
-					if (tab == 1) {
-						if (currentComment == commentAmount) {
-							currentComment = 0;
-						}
-						preContent = document.getElementById('m-comment-content-' + (currentComment+1));
-						currentComment++;
-						preContent.style.display = 'block';
-						preContent.animation('opacity',1,2000,100,play);
+		if (State.tab == 1) {
+			var currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+			currentContent.animation('opacity',-1,1500,100);
+			setTimeout(function () {
+				currentContent.style.display = 'none';
+				if (State.tab == 1) {
+					if (State.currentComment == State.commentAmount - 1) {
+						State.currentComment = 0;
 					} else {
-						// setTimeout(function(){
-							currentContent.style.display = 'block';
-							currentContent.animation('opacity',1,2000,100);
-						// },1000);					
+						State.currentComment++;
 					}
-				},2000);
-			}
-		}
-		if (tab == 0) {
-			playBtn.className = 'm-comment-pause';	
-			tab = 1;				
-			play();
-		} else if(tab == 2){
-			tab = 1;			
-			setTimeout(function () {				
-				play();
+					currentContent = document.getElementById('m-comment-content-' + State.currentComment);
+					currentContent.style.display = 'block';
+					currentContent.animation('opacity',1,1500,100,commentTab);
+				}
 			},1500);
-		}else if(tab == 1) {
-			tab = 0;
-			playBtn.className = 'm-comment-play';
-						
 		}
 	}
 
-	// 读取输入框内容
-	function inputLoader() {
-		var name = document.getElementById('m-comment-name').value;
-		var content = document.getElementById('m-comment-content').value;
-		commentSave(name,content);
-	}
-	
-	// 主程序
-	function main(){
-		readerModel();
-		playBtn.addEventListener('click',commentTab);
-		commentRight.addEventListener('click', clickRight);
-		commentLeft.addEventListener('click', clickLeft);
-
-		commentButton.addEventListener('click', clickButton);
-		commentClose.addEventListener('click', clickClose);
-		commentReturn.addEventListener('click', clickReturn);
-
-		commentTab();
-	}
-	main();
+	// 开始程序
+	init();
 })();
